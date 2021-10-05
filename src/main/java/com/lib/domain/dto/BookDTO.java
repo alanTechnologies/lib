@@ -15,4 +15,5 @@ public class BookDTO {
     private String gender;
     private String university;
     private Integer numberOfLateReturnings;
+
 }
