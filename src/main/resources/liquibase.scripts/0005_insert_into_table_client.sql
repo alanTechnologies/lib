@@ -5,4 +5,4 @@ VALUES('Arthur Kenneth Vanderwall', 23, 'Male'),
         ('Patricia Parker', 20, 'Female'),
         ('Kye Snyder', 25, 'Male'),
         ('Roza Burch', 21, 'Female'),
-        ('Gloria Mercer', 24, 'Female'),
+        ('Gloria Mercer', 24, 'Female');

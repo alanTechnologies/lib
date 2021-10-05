@@ -11,6 +11,7 @@
     <include file="../liquibase.scripts/0002_create_table_client.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0003_create_table_student.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0004_insert_into_table_book.sql" relativeToChangelogFile="true"/>
+    <include file="../liquibase.scripts/0005_insert_into_table_client.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
 
