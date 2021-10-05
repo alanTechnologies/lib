@@ -12,8 +12,8 @@ CREATE TABLE lib.BOOK
     BRAND  character varying(255),
     LANGUAGE character varying(255),
     YEAR int,
-    AVAIALABLE boolean
-
+    BOOK_CONTENT bytea NOT NULL,  -- this one saves a large object (array of bytes -- bytes[] )
+    AVAILABLE BOOLEAN
 
 
 );
