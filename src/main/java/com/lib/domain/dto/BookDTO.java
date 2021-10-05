@@ -10,10 +10,27 @@ import lombok.Setter;
 public class BookDTO {
 
     private Long id;
-    private String name;
-    private Integer age;
-    private String gender;
-    private String university;
-    private Integer numberOfLateReturnings;
+    private Double price;
+    private String title;
+    private String author;
+    private String genre;
+    private String brand;
+    private String language;
+    private Integer year;
+    private Boolean avaialable;
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "id=" + id +
+                ", price='" + price + '\'' +
+                ", title=" + title +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", brand='" + brand + '\'' +
+                ", language='" + language + '\'' +
+                ", year='" + year + '\'' +
+                ", avaialable=" + avaialable +
+                '}';
+    }
 }
