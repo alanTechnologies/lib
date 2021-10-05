@@ -18,6 +18,7 @@ public class BookDTO {
     private String language;
     private Integer year;
     private Boolean avaialable;
+    private byte[] bookContent;
 
     @Override
     public String toString() {
