@@ -44,7 +44,7 @@ public class Book {
     private Integer year;
 
     @Column(name = "BOOK_CONTENT")
-    private Byte bookContent;
+    private byte[] bookContent;
 
     @Column(name = "AVAILABLE")
     private Boolean available;
