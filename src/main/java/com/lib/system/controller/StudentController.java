@@ -13,16 +13,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 @CrossOrigin(origins = "*")
-public class StundetController {
+public class StudentController {
 
     private final StudentService studentService;
 
     @Autowired
-    public StundetController(StudentService studentService) {
+    public StudentController(StudentService studentService) {
         this.studentService = studentService;
     }
 
-    @GetMapping("/students")
+    @GetMapping("/Students")
     public List<Student> getAllStudente() {
         return studentService.getAllStudents();
     }
