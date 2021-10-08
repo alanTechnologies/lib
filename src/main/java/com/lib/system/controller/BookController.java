@@ -2,10 +2,7 @@ package com.lib.system.controller;
 import com.lib.system.entity.Book;
 import com.lib.system.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +21,11 @@ public class BookController {
     @GetMapping("/available-books")
     public List<Book> getAllBooks(){
         return bookService.getAllBooks();
+    }
+
+    @GetMapping("/filtered-books/{title}")
+    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title){
+        return bookService.getFilteredByTitleBooks(title);
     }
 
 }
