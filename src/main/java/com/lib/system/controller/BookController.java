@@ -19,13 +19,17 @@ public class BookController {
     }
 
     @GetMapping("/available-books")
-    public List<Book> getAllBooks(){
+    public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
     @GetMapping("/filtered-books/{title}")
-    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title){
+    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title) {
         return bookService.getFilteredByTitleBooks(title);
     }
 
+    @GetMapping("filtered-books-author/{author}")
+    public List<Book> getAllBooksByAuthor(@PathVariable("author") String author) {
+        return bookService.getAllBooksByAuthor(author);
+    }
 }
