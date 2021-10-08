@@ -23,8 +23,8 @@ public class BookController {
         return bookService.getAllBooks();
     }
 
-    @GetMapping("/filtered-books/{title}")
-    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title) {
+    @GetMapping("/filtered-books-title/{title}")
+    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title){
         return bookService.getFilteredByTitleBooks(title);
     }
 
