@@ -5,7 +5,9 @@ import com.lib.system.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BookService {
@@ -17,6 +19,10 @@ public class BookService {
 
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
+    }
+
+    public List<Book> getFilteredByTitleBooks(String title){
+        return bookRepository.findAll().stream().filter(eachBook -> eachBook.getTitle().contains(title)).collect(Collectors.toList());
     }
 
 }
