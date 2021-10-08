@@ -1,6 +1,8 @@
 package com.lib.system.controller;
-import com.lib.system.entity.Book;
-import com.lib.system.services.BookService;
+
+import com.lib.system.entity.Student;
+import com.lib.system.services.StudentService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,18 +14,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/")
 @CrossOrigin(origins = "*")
-public class BookController {
+public class StudentController {
 
-    BookService bookService;
+    StudentService studentService;
     @Autowired
-    public BookController(BookService bookService)
-    {
-        this.bookService = bookService;
+    public StudentController(StudentService studentService){
+        this.studentService =studentService;
     }
 
-    @GetMapping("/available-books")
-    public List<Book> getAllBooks(){
-        return bookService.getAllBooks();
+    @GetMapping("/students")
+    public List<Student> getAllStudents(){
+        return studentService.getAllStudents();
     }
+
+
 
 }
