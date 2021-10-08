@@ -19,7 +19,7 @@ public class BookController {
     }
 
     @GetMapping("/available-books")
-    public List<Book> getAllBooks(){
+    public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
 
@@ -28,4 +28,8 @@ public class BookController {
         return bookService.getFilteredByTitleBooks(title);
     }
 
+    @GetMapping("filtered-books-author/{author}")
+    public List<Book> getAllBooksByAuthor(@PathVariable("author") String author) {
+        return bookService.getAllBooksByAuthor(author);
+    }
 }
