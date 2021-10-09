@@ -13,6 +13,7 @@
     <include file="../liquibase.scripts/0004_insert_into_table_book.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0005_insert_into_table_client.sql" relativeToChangelogFile="true"/>
     <include file="../liquibase.scripts/0006_insert_data_into_table_student.sql" relativeToChangelogFile="true"/>
+    <include file="../liquibase.scripts/0007_add_column_cnp_in_client.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
 

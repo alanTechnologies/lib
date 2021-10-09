@@ -12,7 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="CLIENT",schema = "lib")
+@Table(name = "CLIENT", schema = "lib")
 @Builder
 public class Client {
 
@@ -29,6 +29,7 @@ public class Client {
     @Column
     private String gender;
 
-
+    @Column
+    private String cnp;
 
 }
