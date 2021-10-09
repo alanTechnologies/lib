@@ -20,7 +20,7 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public List<Client> getAllByCnp(String cnp) {
-        return clientRepository.getAllByCnp(cnp);
+    public Client getClientByCnp(String cnp) {
+        return clientRepository.getClientByCnp(cnp);
     }
 }

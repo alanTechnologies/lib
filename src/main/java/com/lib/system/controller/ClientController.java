@@ -25,8 +25,8 @@ public class ClientController {
     }
 
     @GetMapping("filtered-clients-cnp/{cnp}")
-    public List<Client> getAllBooksByAuthor(@PathVariable(value = "cnp") String cnp) {
-        return clientService.getAllByCnp(cnp);
+    public Client getClientByCnp(@PathVariable(value = "cnp") String cnp) {
+        return clientService.getClientByCnp(cnp);
     }
 }
 
