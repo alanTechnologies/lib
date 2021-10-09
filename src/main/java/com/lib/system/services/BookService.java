@@ -26,10 +26,6 @@ public class BookService {
         return book.getTitle().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT));
     }
 
-    public boolean containsAuthorIgnoreCase(Book book, String title) {
-        return book.getAuthor().toLowerCase(Locale.ROOT).contains(title.toLowerCase(Locale.ROOT));
-    }
-
     public List<Book> getFilteredByTitleBooks(String title) {
         return bookRepository
                 .findAll()
@@ -39,10 +35,6 @@ public class BookService {
     }
 
     public List<Book> getAllBooksByAuthor(String author) {
-        return bookRepository
-                .findAll()
-                .stream()
-                .filter(eachAuthor -> containsAuthorIgnoreCase(eachAuthor, author))
-                .collect(Collectors.toList());
+        return bookRepository.getAllByAuthorContainingIgnoreCase(author);
     }
 }
