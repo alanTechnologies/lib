@@ -26,6 +26,9 @@ public class Student {
     private Integer age;
 
     @Column
+    private String cnp;
+
+    @Column
     private String genre;
 
     @Column

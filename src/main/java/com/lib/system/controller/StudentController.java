@@ -4,10 +4,7 @@ import com.lib.system.entity.Student;
 import com.lib.system.services.StudentService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,16 +14,19 @@ import java.util.List;
 public class StudentController {
 
     StudentService studentService;
+
     @Autowired
-    public StudentController(StudentService studentService){
-        this.studentService =studentService;
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @GetMapping("/students")
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
-
-
+    @GetMapping("/students-by-CNP/{cnp}")
+    public Student getStudentByCNP(@PathVariable(value = "cnp") String cnp) {
+        return studentService.getStudentByCNP(cnp);
+    }
 
 }

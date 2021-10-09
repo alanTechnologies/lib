@@ -6,7 +6,10 @@ CREATE TABLE lib.STUDENT
     ID        SERIAL,
     NAME   character varying(255),
     AGE     integer,
+    CNP     character varying(255),
     GENRE       character varying(255),
     UNIVERSITY  character varying(255),
     NUMBER_OF_LATE_RETURNINGS integer
 );
+
+
