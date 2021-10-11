@@ -19,33 +19,36 @@ import javax.persistence.Table;
 public class Book {
 
     @Id
-    @Column(name = "ID")
+    @Column
     private Long id;
 
-    @Column(name = "PRICE")
+    @Column
     private Double price;
 
-    @Column(name = "TITLE")
+    @Column
     private String title;
 
-    @Column(name = "AUTHOR")
+    @Column
     private String author;
 
-    @Column(name = "GENRE")
+    @Column
     private String genre;
 
-    @Column(name = "BRAND")
+    @Column
     private String brand;
 
-    @Column(name = "LANGUAGE")
+    @Column
     private String language;
 
-    @Column(name = "YEAR")
+    @Column
     private Integer year;
 
-    @Column(name = "BOOK_CONTENT")
+    @Column
     private byte[] bookContent;
 
-    @Column(name = "AVAILABLE")
+    @Column
     private Boolean available;
+
+    @Column
+    private String url;
 }
