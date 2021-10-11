@@ -37,5 +37,8 @@ public class Student {
     @Column
     private Integer numberOfLateReturnings;
 
+    @Column
+    private boolean isValidForRental;
+
 
 }
