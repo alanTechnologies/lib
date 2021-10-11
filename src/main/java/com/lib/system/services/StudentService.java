@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class StudentService {
@@ -17,20 +16,19 @@ public class StudentService {
         this.studentRepository = studentRepository;
     }
 
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
 
-    public Student getStudentByCNP(String cnp){
+    public Student getStudentByCNP(String cnp) {
         Student student = studentRepository.getStudentByCnp(cnp);
 
-        if(student.getNumberOfLateReturnings() > 3){
-            student.setValidForRental(false);
-
+        if (student != null) {
+            if (student.getNumberOfLateReturnings() > 3)
+                student.setValidForRental(false);
+        } else {
+            return new Student();
         }
         return student;
     }
-
-
-
 }
