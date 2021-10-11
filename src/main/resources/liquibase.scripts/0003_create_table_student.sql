@@ -6,6 +6,7 @@ CREATE TABLE lib.STUDENT
     ID        SERIAL,
     NAME   character varying(255),
     AGE     integer,
+    IS_VALID_FOR_RENTAL BOOLEAN,
     CNP     character varying(255),
     GENRE       character varying(255),
     UNIVERSITY  character varying(255),

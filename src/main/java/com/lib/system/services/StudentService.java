@@ -22,8 +22,15 @@ public class StudentService {
     }
 
     public Student getStudentByCNP(String cnp){
+        Student student = studentRepository.getStudentByCnp(cnp);
 
-        return studentRepository.getStudentByCnp(cnp);
+        if(student.getNumberOfLateReturnings() > 3){
+            student.setValidForRental(false);
+
+        }
+        return student;
     }
+
+
 
 }
