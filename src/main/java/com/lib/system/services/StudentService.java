@@ -26,8 +26,6 @@ public class StudentService {
         if (student != null) {
             if (student.getNumberOfLateReturnings() > 3)
                 student.setValidForRental(false);
-        } else {
-            return new Student();
         }
         return student;
     }
