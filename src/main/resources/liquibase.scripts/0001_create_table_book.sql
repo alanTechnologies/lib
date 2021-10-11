@@ -14,7 +14,8 @@ CREATE TABLE lib.BOOK
     YEAR int,
     URL character  varying (255),
     BOOK_CONTENT bytea NOT NULL,  -- this one saves a large object (array of bytes -- bytes[] )
-    AVAILABLE BOOLEAN
+    AVAILABLE BOOLEAN,
+    STOCK int
 
 
 );
