@@ -24,12 +24,17 @@ public class BookController {
     }
 
     @GetMapping("/filtered-books-title/{title}")
-    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title){
+    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title) {
         return bookService.getFilteredByTitleBooks(title);
     }
 
     @GetMapping("filtered-books-author/{author}")
     public List<Book> getAllBooksByAuthor(@PathVariable(value = "author") String author) {
         return bookService.getAllBooksByAuthor(author);
+    }
+
+    @GetMapping("filtered-books-id/{id}")
+    public Book getAllBookById(@PathVariable(value = "id") Long id) {
+        return bookService.getAllBookById(id);
     }
 }
