@@ -38,7 +38,7 @@ public class BookService {
         return bookRepository.getAllByAuthorContainingIgnoreCase(author);
     }
 
-    public Book getAllBookById(Long id) {
+    public Book getBookById(Long id) {
         return bookRepository.getById(id);
     }
 }

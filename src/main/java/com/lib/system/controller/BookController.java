@@ -34,7 +34,7 @@ public class BookController {
     }
 
     @GetMapping("filtered-books-id/{id}")
-    public Book getAllBookById(@PathVariable(value = "id") Long id) {
-        return bookService.getAllBookById(id);
+    public Book getBookById(@PathVariable(value = "id") Long id) {
+        return bookService.getBookById(id);
     }
 }

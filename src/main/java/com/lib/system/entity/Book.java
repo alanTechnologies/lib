@@ -1,5 +1,6 @@
 package com.lib.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "book", schema = "lib")
+@JsonIgnoreProperties
 public class Book {
 
     @Id

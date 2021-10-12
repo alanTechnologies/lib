@@ -1,6 +1,7 @@
 package com.lib.system.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Table(name="rentbook", schema = "lib")
+@JsonIgnoreProperties
 public class RentBook {
 
     @Id

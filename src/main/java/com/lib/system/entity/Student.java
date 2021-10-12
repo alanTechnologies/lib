@@ -1,5 +1,6 @@
 package com.lib.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.List;
 @Entity
 @Table (name="student",schema="lib")
 @Builder
+@JsonIgnoreProperties
 public class Student {
 
     @Id
