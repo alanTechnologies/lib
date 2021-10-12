@@ -51,4 +51,7 @@ public class Book {
 
     @Column
     private String url;
+
+    @Column
+    private Integer stock;
 }
