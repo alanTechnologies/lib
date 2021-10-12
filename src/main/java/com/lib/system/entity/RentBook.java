@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="RENTBOOK", schema = "lib")
+@Table(name="rentbook", schema = "lib")
 public class RentBook {
 
     @Id
@@ -22,14 +22,18 @@ public class RentBook {
     private Long id;
 
     @OneToOne
+    @JoinColumn(name="book_id")
     private Book book;
 
     @Column
-    private LocalDate startDay;
+    private LocalDate startDate;
 
     @Column
-    private LocalDate endDay;
+    private LocalDate endDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "STUDENT_ID")
+    private Student student;
 
 
 

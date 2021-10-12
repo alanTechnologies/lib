@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "BOOK", schema = "lib")
+@Table(name = "book", schema = "lib")
 public class Book {
 
     @Id
@@ -54,4 +54,5 @@ public class Book {
 
     @Column
     private Integer stock;
+
 }

@@ -1,9 +1,6 @@
 package com.lib.system.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table (name="STUDENT",schema="lib")
+@Table (name="student",schema="lib")
 @Builder
 public class Student {
 
@@ -41,7 +38,7 @@ public class Student {
     @Column
     private boolean isValidForRental;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
     private List<RentBook> rentBook;
 
 
