@@ -37,4 +37,8 @@ public class BookService {
     public List<Book> getAllBooksByAuthor(String author) {
         return bookRepository.getAllByAuthorContainingIgnoreCase(author);
     }
+
+    public Book getAllBookById(Long id) {
+        return bookRepository.getById(id);
+    }
 }
