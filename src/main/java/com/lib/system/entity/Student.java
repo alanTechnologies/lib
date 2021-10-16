@@ -1,6 +1,8 @@
 package com.lib.system.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,6 +43,7 @@ public class Student {
     private boolean isValidForRental;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
+    @JsonManagedReference
     private List<RentBook> rentBook;
 
 

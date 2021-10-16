@@ -1,10 +1,7 @@
 package com.lib.system.controller;
 
-import com.lib.system.entity.Book;
-import com.lib.system.entity.RentBook;
 import com.lib.system.services.RentBookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -30,7 +27,7 @@ public class RentBookController {
 
         String startDay = params.get("startDay");
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
 

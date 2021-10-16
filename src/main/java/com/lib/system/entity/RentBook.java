@@ -1,6 +1,7 @@
 package com.lib.system.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
@@ -33,6 +34,7 @@ public class RentBook {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "STUDENT_ID")
+    @JsonBackReference
     private Student student;
 
 
