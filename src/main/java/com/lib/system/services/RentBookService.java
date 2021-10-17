@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Map;
 
 @Service
 public class RentBookService {
@@ -26,7 +28,9 @@ public class RentBookService {
     }
 
     public RentBook createRentBook(Long idBook, LocalDate startDay, LocalDate endDay, String cnp) {
+
         RentBook rentBook = new RentBook();
+
         rentBook.setBook(bookRepository.getById(idBook));
         rentBook.setStartDate(startDay);
         rentBook.setEndDate(endDay);
@@ -36,8 +40,23 @@ public class RentBookService {
     }
 
 
-    public void save(Long idBook, LocalDate startDay, LocalDate endDay, String cnp) {
-    RentBook rentBook = createRentBook(idBook,startDay,endDay,cnp);
+    public void save(Map<String, String> params) {
+        Long idBook = Long.parseLong(params.get("idBook"));
+
+        String startDay = params.get("startDay");
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
+
+        String endDay = params.get("endDay");
+
+        LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
+
+        String cnp = params.get("cnp");
+
+
+    RentBook rentBook = createRentBook(idBook,startDayFormatted,endDayFormatted,cnp);
 
         rentBookRepository.save(rentBook);
 
