@@ -16,6 +16,7 @@ public class RentBookService {
     private RentBookRepository rentBookRepository;
     private BookRepository bookRepository;
     private StudentService studentService;
+    private RentBook rentBook;
 
     @Autowired
     public RentBookService(RentBookRepository rentBookRepository, BookRepository bookRepository, StudentService studentService) {
@@ -44,26 +45,32 @@ public class RentBookService {
 
         Long currentIdBook = Long.parseLong(params.get("idBook"));
 
-        for (RentBook rentBooky : booksStudent) {
+        if(rentBookContainsIdBook(booksStudent,currentIdBook)){
+            System.out.println("Asmo Pele");
+        } else
+        {
+            Long idBook = Long.parseLong(params.get("idBook"));
+            String startDay = params.get("startDay");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
+            String endDay = params.get("endDay");
+            LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
+            String cnp = params.get("cnp");
+            RentBook rentBook = createRentBook(idBook, startDayFormatted, endDayFormatted, cnp);
+            rentBookRepository.save(rentBook);
+        }
 
-            Long dbIdBook = rentBooky.getId();
 
-            if (dbIdBook.equals(currentIdBook)) {
+    }
 
-                System.out.println("asmo pele");
-            } else {
-                Long idBook = Long.parseLong(params.get("idBook"));
-                String startDay = params.get("startDay");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
-                String endDay = params.get("endDay");
-                LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
-                String cnp = params.get("cnp");
-                RentBook rentBook = createRentBook(idBook, startDayFormatted, endDayFormatted, cnp);
+    public  boolean rentBookContainsIdBook(List<RentBook> rentBookList, Long id){
 
-                rentBookRepository.save(rentBook);
+        for(int i = 0; i<rentBookList.size();i++){
+            if(rentBookList.get(i).getBook().getId().equals(id)){
+                return true;
             }
         }
+        return false;
     }
 
 }
