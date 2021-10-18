@@ -68,8 +68,8 @@ public class RentBookService {
 
     public  boolean rentBookContainsIdBook(List<RentBook> rentBookList, Long id){
 
-        for(int i = 0; i<rentBookList.size();i++){
-            if(rentBookList.get(i).getBook().getId().equals(id)){
+        for(RentBook rentBook:rentBookList){
+            if(rentBook.getBook().getId().equals(id)){
                 return true;
             }
         }
