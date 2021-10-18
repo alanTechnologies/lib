@@ -1,5 +1,6 @@
 package com.lib.system.controller;
 
+import com.lib.system.exceptions.BookAlreadyRentException;
 import com.lib.system.services.RentBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,7 +23,7 @@ public class RentBookController {
     }
 
     @PostMapping("rent-a-book")
-    public void saveRentBook(@RequestParam Map<String, String> params) {
+    public void saveRentBook(@RequestParam Map<String, String> params) throws BookAlreadyRentException {
 
 
         rentBookService.save(params);

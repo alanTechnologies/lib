@@ -1,6 +1,7 @@
 package com.lib.system.services;
 
 import com.lib.system.entity.RentBook;
+import com.lib.system.exceptions.BookAlreadyRentException;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.repositories.RentBookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class RentBookService {
     }
 
 
-    public void save(Map<String, String> params) {
+    public void save(Map<String, String> params) throws BookAlreadyRentException {
 
         String currentCnp = params.get("cnp");
         List<RentBook> booksStudent = rentBookRepository.getAllByStudentCnp(currentCnp);
@@ -46,7 +47,9 @@ public class RentBookService {
         Long currentIdBook = Long.parseLong(params.get("idBook"));
 
         if(rentBookContainsIdBook(booksStudent,currentIdBook)){
-            System.out.println("Asmo Pele");
+
+            throw new BookAlreadyRentException("Asmo Pele");
+
         } else
         {
             Long idBook = Long.parseLong(params.get("idBook"));
