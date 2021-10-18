@@ -1,17 +1,14 @@
 package com.lib.system.services;
 
-import com.lib.system.entity.Book;
 import com.lib.system.entity.RentBook;
-import com.lib.system.entity.Student;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.repositories.RentBookRepository;
-import com.lib.system.repositories.StudentRepository;
-import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -41,26 +38,32 @@ public class RentBookService {
 
 
     public void save(Map<String, String> params) {
-        Long idBook = Long.parseLong(params.get("idBook"));
 
-        String startDay = params.get("startDay");
+        String currentCnp = params.get("cnp");
+        List<RentBook> booksStudent = rentBookRepository.getAllByStudentCnp(currentCnp);
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Long currentIdBook = Long.parseLong(params.get("idBook"));
 
-        LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
+        for (RentBook rentBooky : booksStudent) {
 
-        String endDay = params.get("endDay");
+            Long dbIdBook = rentBooky.getId();
 
-        LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
+            if (dbIdBook.equals(currentIdBook)) {
 
-        String cnp = params.get("cnp");
+                System.out.println("asmo pele");
+            } else {
+                Long idBook = Long.parseLong(params.get("idBook"));
+                String startDay = params.get("startDay");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
+                String endDay = params.get("endDay");
+                LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
+                String cnp = params.get("cnp");
+                RentBook rentBook = createRentBook(idBook, startDayFormatted, endDayFormatted, cnp);
 
-
-    RentBook rentBook = createRentBook(idBook,startDayFormatted,endDayFormatted,cnp);
-
-        rentBookRepository.save(rentBook);
-
+                rentBookRepository.save(rentBook);
+            }
+        }
     }
-
 
 }
