@@ -1,5 +1,6 @@
 package com.lib.system.services;
 
+import com.lib.system.entity.Book;
 import com.lib.system.entity.RentBook;
 import com.lib.system.exceptions.BookAlreadyRentException;
 import com.lib.system.repositories.BookRepository;
@@ -52,14 +53,18 @@ public class RentBookService {
 
         } else
         {
-            Long idBook = Long.parseLong(params.get("idBook"));
+            Book book = bookRepository.getById(currentIdBook);
+            book.setStock(book.getStock() - 1);
+
+            bookRepository.save(book);
+
             String startDay = params.get("startDay");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
             String endDay = params.get("endDay");
             LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
             String cnp = params.get("cnp");
-            RentBook rentBook = createRentBook(idBook, startDayFormatted, endDayFormatted, cnp);
+            RentBook rentBook = createRentBook(currentIdBook, startDayFormatted, endDayFormatted, cnp);
             rentBookRepository.save(rentBook);
         }
 
