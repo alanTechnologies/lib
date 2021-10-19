@@ -48,7 +48,7 @@ public class RentBookService {
 
         if(rentBookContainsIdBook(booksStudent,currentIdBook)){
 
-            throw new BookAlreadyRentException("Asmo Pele");
+            throw new BookAlreadyRentException("Book already rent");
 
         } else
         {
