@@ -51,30 +51,37 @@ public class RentBookService {
 
             throw new BookAlreadyRentException("Book already rent");
 
-        } else
-        {
-            Book book = bookRepository.getById(currentIdBook);
-            book.setStock(book.getStock() - 1);
+        } else {
+            updateBookStock(currentIdBook);
 
-            bookRepository.save(book);
-
-            String startDay = params.get("startDay");
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
-            String endDay = params.get("endDay");
-            LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
-            String cnp = params.get("cnp");
-            RentBook rentBook = createRentBook(currentIdBook, startDayFormatted, endDayFormatted, cnp);
-            rentBookRepository.save(rentBook);
+            saveRentBook(params, currentIdBook);
         }
 
 
     }
 
-    public  boolean rentBookContainsIdBook(List<RentBook> rentBookList, Long id){
+    private void saveRentBook(Map<String, String> params, Long currentIdBook) {
+        String startDay = params.get("startDay");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startDayFormatted = LocalDate.parse(startDay, formatter);
+        String endDay = params.get("endDay");
+        LocalDate endDayFormatted = LocalDate.parse(endDay, formatter);
+        String cnp = params.get("cnp");
+        RentBook rentBook = createRentBook(currentIdBook, startDayFormatted, endDayFormatted, cnp);
+        rentBookRepository.save(rentBook);
+    }
 
-        for(RentBook rentBook:rentBookList){
-            if(rentBook.getBook().getId().equals(id)){
+    private void updateBookStock(Long currentIdBook) {
+        Book book = bookRepository.getById(currentIdBook);
+        book.setStock(book.getStock() - 1);
+
+        bookRepository.save(book);
+    }
+
+    public boolean rentBookContainsIdBook(List<RentBook> rentBookList, Long id) {
+
+        for (RentBook rentBook : rentBookList) {
+            if (rentBook.getBook().getId().equals(id)) {
                 return true;
             }
         }
