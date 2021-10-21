@@ -5,26 +5,30 @@ import com.lib.system.entity.RentBook;
 import com.lib.system.exceptions.BookAlreadyRentException;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.repositories.RentBookRepository;
+import com.lib.system.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class RentBookService {
     private RentBookRepository rentBookRepository;
     private BookRepository bookRepository;
     private StudentService studentService;
-    private RentBook rentBook;
+    private StudentRepository studentRepository;
 
     @Autowired
-    public RentBookService(RentBookRepository rentBookRepository, BookRepository bookRepository, StudentService studentService) {
+    public RentBookService(RentBookRepository rentBookRepository, BookRepository bookRepository, StudentService studentService, StudentRepository studentRepository) {
         this.rentBookRepository = rentBookRepository;
         this.bookRepository = bookRepository;
         this.studentService = studentService;
+        this.studentRepository =studentRepository;
     }
 
     public RentBook createRentBook(Long idBook, LocalDate startDay, LocalDate endDay, String cnp) {
@@ -79,6 +83,32 @@ public class RentBookService {
             }
         }
         return false;
+    }
+
+    public List<RentBook> getRentBookList(String cnp){
+       List<RentBook>  rentBookList = studentRepository.getStudentByCnp(cnp).getRentBook();
+
+        return rentBookList;
+    }
+
+    public List<RentBook> getRentBookListByStartDate(String cnp){
+        List<RentBook> rentBookList = getRentBookList(cnp);
+
+      return  rentBookList
+                .stream()
+                .sorted(Comparator.comparing(RentBook::getStartDate))
+                .collect(Collectors.toList());
+    }
+
+    public List<RentBook> getRentBookListByBookTitle(String cnp){
+        List<RentBook> rentBookList = getRentBookList(cnp);
+
+        return rentBookList
+                .stream()
+                .sorted(Comparator.comparing(eachBook -> eachBook.getBook()
+                        .getTitle()))
+                .collect(Collectors.toList());
+
     }
 
 }
