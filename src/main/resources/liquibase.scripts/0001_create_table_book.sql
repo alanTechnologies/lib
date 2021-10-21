@@ -1,8 +1,8 @@
 --changeset CIOBANU_IONUT_99_CREATE_TABEL_BOOK
 
-DROP TABLE IF EXISTS lib.BOOK cascade;
+DROP TABLE IF EXISTS lib.book cascade;
 
-CREATE TABLE IF NOT EXISTS lib.BOOK
+CREATE TABLE IF NOT EXISTS lib.book
 (
 
     ID        SERIAL unique ,
