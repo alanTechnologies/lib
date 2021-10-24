@@ -10,6 +10,7 @@ import com.lib.system.repositories.StudentRepository;
 import liquibase.pro.packaged.B;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -95,6 +96,14 @@ public class RentBookService {
         return rentBookList;
     }
 
+
+
+
+    public void setRentBookList(List<RentBook> myList,String cnp){
+        Student student = studentRepository.getStudentByCnp(cnp);
+        student.setRentBook(getRentBookList(cnp));
+    }
+
     public List<RentBook> getRentBookListByStartDate(String cnp){
         List<RentBook> rentBookList = getRentBookList(cnp);
 
@@ -115,18 +124,30 @@ public class RentBookService {
 
     }
 
-    public void returnBookToLibraryAndSave(String cnp, Long bookId) {
+    public void returnBookToLibraryAndSave(@RequestParam Map<String, String> params) {
+        String myCnp = params.get("cnp");
+        Long currentIdBook = Long.parseLong(params.get("idBook"));
+        List<RentBook> rentBookList = getRentBookList(myCnp);
+        rentBookList.stream().forEach(x-> System.out.println(x));
 
-        List<RentBook> rentBookList = getRentBookList(cnp);
-
+        System.out.println("//////////////////////////////////");
         for(int i = 0;i<rentBookList.size();i++){
-
-            System.out.println(rentBookList.get(i));
-            if(rentBookList.get(i).getBook().getId().equals(bookId)){
+            if(rentBookList.get(i).getBook().getId().equals(currentIdBook)){
                 rentBookList.remove(i);
-
             }
         }
+        rentBookList.stream().forEach(x-> System.out.println(x));
+        System.out.println("///////////////////////////////////");
+
+        Student student =studentRepository.getStudentByCnp(myCnp);
+
+        student.setRentBook(rentBookList);
+        studentRepository.save(student);
+        Book book = bookService.getBookById(currentIdBook);
+        int a = book.getStock();
+        a++;
+        book.setStock(a);
+        bookRepository.save(book);
 //        System.out.println(rentBookList);
 
 
