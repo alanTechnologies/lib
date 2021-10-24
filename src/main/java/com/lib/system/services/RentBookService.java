@@ -91,9 +91,7 @@ public class RentBookService {
     }
 
     public List<RentBook> getRentBookList(String cnp){
-        List<RentBook>  rentBookList = studentRepository.getStudentByCnp(cnp).getRentBook();
-
-        return rentBookList;
+        return studentRepository.getStudentByCnp(cnp).getRentBook();
     }
 
 
@@ -127,51 +125,16 @@ public class RentBookService {
     public void returnBookToLibraryAndSave(@RequestParam Map<String, String> params) {
         String myCnp = params.get("cnp");
         Long currentIdBook = Long.parseLong(params.get("idBook"));
+        Student student = studentService.getStudentByCNP(myCnp);
+
+        rentBookRepository.deleteByBook_IdAndStudent_Id(currentIdBook,student.getId());
+
         List<RentBook> rentBookList = getRentBookList(myCnp);
-        rentBookList.stream().forEach(x-> System.out.println(x));
+        rentBookList.forEach(System.out::println);
 
-        System.out.println("//////////////////////////////////");
-        for(int i = 0;i<rentBookList.size();i++){
-            if(rentBookList.get(i).getBook().getId().equals(currentIdBook)){
-                rentBookList.remove(i);
-            }
-        }
-        rentBookList.stream().forEach(x-> System.out.println(x));
-        System.out.println("///////////////////////////////////");
-
-        Student student =studentRepository.getStudentByCnp(myCnp);
-
-        student.setRentBook(rentBookList);
-        studentRepository.save(student);
         Book book = bookService.getBookById(currentIdBook);
-        int a = book.getStock();
-        a++;
-        book.setStock(a);
+        book.setStock(book.getStock() + 1);
         bookRepository.save(book);
-//        System.out.println(rentBookList);
-
-
-//        String cnp = params.get("cnp");
-//        Long currentIdBook = Long.parseLong(params.get("bookId"));
-//
-//        List<RentBook> myList = getRentBookList(cnp);
-//        for (int i = 0; i < myList.size(); i++) {
-//
-//            if (myList.get(i).getBook().getId().equals(currentIdBook)) {
-//                myList.remove(i);
-//            }
-//        }
-//          Student student = studentService.getStudentByCNP(cnp);
-//            student.setRentBook(myList);
-//            studentRepository.save(student);
-//
-//         int a =  bookService.getBookById(currentIdBook).getStock();
-//          a++;
-//
-//          Book book = bookService.getBookById(currentIdBook);
-//
-//          book.setStock(a);
-//          bookRepository.save(book);
     }
 
 }
