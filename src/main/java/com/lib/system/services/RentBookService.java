@@ -2,10 +2,12 @@ package com.lib.system.services;
 
 import com.lib.system.entity.Book;
 import com.lib.system.entity.RentBook;
+import com.lib.system.entity.Student;
 import com.lib.system.exceptions.BookAlreadyRentException;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.repositories.RentBookRepository;
 import com.lib.system.repositories.StudentRepository;
+import liquibase.pro.packaged.B;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +22,17 @@ import java.util.stream.Collectors;
 public class RentBookService {
     private RentBookRepository rentBookRepository;
     private BookRepository bookRepository;
+    private BookService bookService;
     private StudentService studentService;
     private StudentRepository studentRepository;
 
     @Autowired
-    public RentBookService(RentBookRepository rentBookRepository, BookRepository bookRepository, StudentService studentService, StudentRepository studentRepository) {
+    public RentBookService(RentBookRepository rentBookRepository, BookRepository bookRepository, StudentService studentService, StudentRepository studentRepository, BookService bookService) {
         this.rentBookRepository = rentBookRepository;
         this.bookRepository = bookRepository;
         this.studentService = studentService;
         this.studentRepository =studentRepository;
+        this.bookService = bookService;
     }
 
     public RentBook createRentBook(Long idBook, LocalDate startDay, LocalDate endDay, String cnp) {
@@ -86,7 +90,7 @@ public class RentBookService {
     }
 
     public List<RentBook> getRentBookList(String cnp){
-       List<RentBook>  rentBookList = studentRepository.getStudentByCnp(cnp).getRentBook();
+        List<RentBook>  rentBookList = studentRepository.getStudentByCnp(cnp).getRentBook();
 
         return rentBookList;
     }
@@ -109,6 +113,44 @@ public class RentBookService {
                         .getTitle()))
                 .collect(Collectors.toList());
 
+    }
+
+    public void returnBookToLibraryAndSave(String cnp, Long bookId) {
+
+        List<RentBook> rentBookList = getRentBookList(cnp);
+
+        for(int i = 0;i<rentBookList.size();i++){
+
+            System.out.println(rentBookList.get(i));
+            if(rentBookList.get(i).getBook().getId().equals(bookId)){
+                rentBookList.remove(i);
+
+            }
+        }
+//        System.out.println(rentBookList);
+
+
+//        String cnp = params.get("cnp");
+//        Long currentIdBook = Long.parseLong(params.get("bookId"));
+//
+//        List<RentBook> myList = getRentBookList(cnp);
+//        for (int i = 0; i < myList.size(); i++) {
+//
+//            if (myList.get(i).getBook().getId().equals(currentIdBook)) {
+//                myList.remove(i);
+//            }
+//        }
+//          Student student = studentService.getStudentByCNP(cnp);
+//            student.setRentBook(myList);
+//            studentRepository.save(student);
+//
+//         int a =  bookService.getBookById(currentIdBook).getStock();
+//          a++;
+//
+//          Book book = bookService.getBookById(currentIdBook);
+//
+//          book.setStock(a);
+//          bookRepository.save(book);
     }
 
 }

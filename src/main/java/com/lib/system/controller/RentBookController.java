@@ -45,4 +45,10 @@ public class RentBookController {
         return rentBookService.getRentBookListByBookTitle(cnp);
     }
 
+    @PostMapping("return-a-book")
+    public void returnAndSave(String cnp, Long bookId){
+
+        rentBookService.returnBookToLibraryAndSave(cnp,bookId);
+    }
+
 }
