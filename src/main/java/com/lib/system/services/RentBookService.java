@@ -94,14 +94,6 @@ public class RentBookService {
         return studentRepository.getStudentByCnp(cnp).getRentBook();
     }
 
-
-
-
-    public void setRentBookList(List<RentBook> myList,String cnp){
-        Student student = studentRepository.getStudentByCnp(cnp);
-        student.setRentBook(getRentBookList(cnp));
-    }
-
     public List<RentBook> getRentBookListByStartDate(String cnp){
         List<RentBook> rentBookList = getRentBookList(cnp);
 
@@ -123,6 +115,7 @@ public class RentBookService {
     }
 
     public void returnBookToLibraryAndSave(@RequestParam Map<String, String> params) {
+
         String myCnp = params.get("cnp");
         Long currentIdBook = Long.parseLong(params.get("idBook"));
         Student student = studentService.getStudentByCNP(myCnp);
