@@ -118,16 +118,17 @@ public class RentBookService {
 
         String myCnp = params.get("cnp");
         Long currentIdBook = Long.parseLong(params.get("idBook"));
-        Student student = studentService.getStudentByCNP(myCnp);
 
-        rentBookRepository.deleteByBook_IdAndStudent_Id(currentIdBook,student.getId());
+        rentBookRepository.deleteByBook_IdAndStudent_Cnp(currentIdBook,myCnp);
 
-        List<RentBook> rentBookList = getRentBookList(myCnp);
-        rentBookList.forEach(System.out::println);
+        saveBook(currentIdBook);
 
-        Book book = bookService.getBookById(currentIdBook);
+
+    }
+
+    public void saveBook(Long bookId){
+        Book book = bookService.getBookById(bookId);
         book.setStock(book.getStock() + 1);
         bookRepository.save(book);
     }
-
 }

@@ -13,5 +13,5 @@ public interface RentBookRepository extends JpaRepository<RentBook, Long> {
     List<RentBook> getAllByStudentCnp(String currentCnp);
 
     @Transactional
-    void deleteByBook_IdAndStudent_Id(Long idBook, Long idStudent);
+    void deleteByBook_IdAndStudent_Cnp(Long idBook,String cnp);
 }

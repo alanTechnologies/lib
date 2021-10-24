@@ -45,7 +45,7 @@ public class RentBookController {
         return rentBookService.getRentBookListByBookTitle(cnp);
     }
 
-    @PostMapping("return-a-book")
+    @DeleteMapping("return-a-book")
     public void returnAndSave(@RequestParam Map<String, String> params){
 
         rentBookService.returnBookToLibraryAndSave(params);
