@@ -1,9 +1,11 @@
 package com.lib.system.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
@@ -16,6 +18,20 @@ import java.util.List;
 @Builder
 @JsonIgnoreProperties
 public class Student {
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", cnp='" + cnp + '\'' +
+                ", genre='" + genre + '\'' +
+                ", university='" + university + '\'' +
+                ", numberOfLateReturnings=" + numberOfLateReturnings +
+                ", isValidForRental=" + isValidForRental +
+                '}';
+    }
 
     @Id
     @GeneratedValue
@@ -45,6 +61,5 @@ public class Student {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "student")
     @JsonManagedReference
     private List<RentBook> rentBook;
-
 
 }
