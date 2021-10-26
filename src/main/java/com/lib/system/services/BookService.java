@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,6 +40,7 @@ public class BookService {
     }
 
     public Book getBookById(Long id) {
-        return bookRepository.getById(id);
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        return bookOptional.orElseThrow();
     }
 }

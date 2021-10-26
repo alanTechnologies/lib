@@ -5,11 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Blob;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +20,7 @@ import javax.persistence.Table;
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private Long id;
 
@@ -46,6 +46,8 @@ public class Book {
     private Integer year;
 
     @Column
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
     private byte[] bookContent;
 
     @Column
