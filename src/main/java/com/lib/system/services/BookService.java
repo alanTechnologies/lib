@@ -60,7 +60,7 @@ public class BookService {
         List<Book> booksAfterUpdate = getAllBooks();
         for (Book book : booksAfterUpdate) {
 
-            byte[] decoded = Base64.getDecoder().decode(book.getBookContent());
+            byte[] decoded = book.getBookContent();
             InputStream inputStream = new ByteArrayInputStream(decoded);
             String textFromBook = tikaParser.parseToString(inputStream, metadata);
             if (textFromBook.contains(textToSearch)) {

@@ -4,6 +4,7 @@ import com.lib.system.entity.Book;
 import com.lib.system.repositories.BookRepository;
 import liquibase.util.file.FilenameUtils;
 import org.apache.tika.exception.TikaException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +15,6 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Base64;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +25,7 @@ public class FillBooksWithContent {
     BookRepository bookRepository;
     BookService bookService;
 
+    @Autowired
     public FillBooksWithContent(BookService bookService, BookRepository bookRepository) {
         this.bookService = bookService;
         this.bookRepository = bookRepository;
@@ -40,8 +41,7 @@ public class FillBooksWithContent {
                         .collect(Collectors.toList());
 
         List<String> pathsOfBooksList =
-//                Files.list(Paths.get("C:\\Users\\steff\\Desktop\\Aplicatii Java Web\\lib"))
-                Files.list(Paths.get("..\\..\\..\\..\\..\\"))
+                Files.list(Paths.get(""))
                         .filter(file -> !Files.isDirectory(file))
                         .map(Path::getFileName)
                         .map(Path::toString)
@@ -63,8 +63,7 @@ public class FillBooksWithContent {
                 Path path = Path.of(convFile.getAbsolutePath());
                 File pdfToSave = new File(path.toString());
                 InputStream inputStream = new FileInputStream(pdfToSave);
-                byte[] bytesEncoded =  Base64.getEncoder().encode(inputStream.readAllBytes());
-//                byte[] encoded = Base64.getEncoder().encode("Hello".getBytes());
+                byte[] bytesEncoded =  inputStream.readAllBytes();
 
                 bookToUpdate = books.get(i);
                 bookToUpdate.setBookContent(bytesEncoded);
