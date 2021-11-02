@@ -1,5 +1,6 @@
 package com.lib.system.controller;
 
+import com.lib.system.DTO.BookDTO;
 import com.lib.system.entity.Book;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.services.BookService;
@@ -54,7 +55,7 @@ public class BookController {
     }
 
     @GetMapping("shazam-book/{text}")
-    public List<Book> getBookByContent(@PathVariable(value = "text") String text) throws IOException, TikaException {
+    public List<BookDTO> getBookByContent(@PathVariable(value = "text") String text) throws IOException, TikaException {
         return bookService.getBookByItsContent(text);
     }
 

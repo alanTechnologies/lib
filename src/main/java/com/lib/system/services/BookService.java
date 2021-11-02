@@ -1,5 +1,6 @@
 package com.lib.system.services;
 
+import com.lib.system.DTO.BookDTO;
 import com.lib.system.entity.Book;
 import com.lib.system.repositories.BookRepository;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
     private BookRepository bookRepository;
+    private BookDTO bookDTO;
 
     @Autowired
     public BookService(BookRepository bookRepository) {
@@ -50,29 +52,49 @@ public class BookService {
         return bookOptional.orElseThrow();
     }
 
-    public List<Book> getBookByItsContent(String textToSearch) throws IOException, TikaException {
+    public BookDTO mapBookToBookDTO(Book book) {
+        BookDTO bookDTO = new BookDTO();
 
-        List<Book> titleOfFoundBook = new ArrayList<>();
+        bookDTO.setTitle(book.getTitle());
+        bookDTO.setAuthor(book.getAuthor());
+        bookDTO.setId(book.getId());
+        bookDTO.setStock(book.getStock());
+        bookDTO.setBrand(book.getBrand());
+        bookDTO.setGenre(book.getGenre());
+        bookDTO.setLanguage(book.getLanguage());
+        bookDTO.setPrice(book.getPrice());
+        bookDTO.setUrl(book.getUrl());
+        bookDTO.setYear(book.getYear());
+
+        return bookDTO;
+    }
+
+    public List<BookDTO> getBookByItsContent(String textToSearch) throws IOException, TikaException {
+
+
+        List<BookDTO> titleOfFoundBookDTO = new ArrayList<>();
         Tika tikaParser = new Tika();
         tikaParser.setMaxStringLength(-1);
         Metadata metadata = new Metadata();
 
+
         List<Book> booksAfterUpdate = getAllBooks();
         for (Book book : booksAfterUpdate) {
+            BookDTO bookDTO = mapBookToBookDTO(book);
 
             byte[] decoded = book.getBookContent();
             InputStream inputStream = new ByteArrayInputStream(decoded);
             String textFromBook = tikaParser.parseToString(inputStream, metadata);
             if (textFromBook.contains(textToSearch)) {
-                titleOfFoundBook.add(book);
+                titleOfFoundBookDTO.add(bookDTO);
             } else {
                 System.out.println(book.getTitle() + " nu contine " + textToSearch);
             }
 
         }
 
-        System.out.println(titleOfFoundBook.size());
-        return titleOfFoundBook;
+        System.out.println(titleOfFoundBookDTO.size());
+        return titleOfFoundBookDTO;
     }
 
 }
