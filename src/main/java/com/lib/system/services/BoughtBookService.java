@@ -25,13 +25,12 @@ public class BoughtBookService {
         this.bookService = bookService;
     }
 
-    public void saveBoughtBook(Map<String, String> params) {
+    public void saveBoughtBook(Map <String,String> params) {
         BoughtBook boughtBook = new BoughtBook();
         String email = params.get("email");
-        Long bookId = Long.parseLong(params.get("idBook"));
+            Long bookId = Long.parseLong(params.get("idBook"));
         Book book = bookService.getBookById(bookId);
-
-        boughtBook.setBook(book);
+        boughtBook.setBook(bookService.getBookById(bookId));
         boughtBook.setStartDate(LocalDate.now());
         boughtBook.setMaxReturnDate(LocalDate.now().plusDays(30));
 
@@ -41,7 +40,8 @@ public class BoughtBookService {
         boughtBook.setClient(client);
 
 
-        boughtBookRepository.save(boughtBook);
+
+            boughtBookRepository.save(boughtBook);
 
     }
 

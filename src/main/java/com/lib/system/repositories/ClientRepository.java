@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
-    Client getClientByCnp(String cnp);
     Client getClientByEmail(String email);
+    Client getClientByCnp(String cnp);
 
 }
