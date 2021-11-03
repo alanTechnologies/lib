@@ -114,7 +114,7 @@ public class RentBookService {
 
     }
 
-    public void returnBookToLibraryAndSave(@RequestParam Map<String, String> params) {
+    public void returnBookToLibraryAndSave( Map<String, String> params) {
 
         String myCnp = params.get("cnp");
         Long currentIdBook = Long.parseLong(params.get("idBook"));

@@ -19,7 +19,7 @@ public class QRCodeGenerator {
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 
         Path path = FileSystems.getDefault().getPath(filePath);
-        MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+        MatrixToImageWriter.writeToPath(bitMatrix, "png", path);
 
     }
 
@@ -29,7 +29,7 @@ public class QRCodeGenerator {
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
 
         ByteArrayOutputStream pngOutputStream = new ByteArrayOutputStream();
-        MatrixToImageWriter.writeToStream(bitMatrix, "PNG", pngOutputStream);
+        MatrixToImageWriter.writeToStream(bitMatrix, "png", pngOutputStream);
         byte[] pngData = pngOutputStream.toByteArray();
         return pngData;
     }

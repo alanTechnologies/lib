@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS lib.boughtbook
 (
     ID SERIAL unique,
     MAX_RETURN_DATE DATE,
-    END_DATE DATE,
+    START_DATE DATE,
     BOOK_ID integer,
     CLIENT_ID integer,
 
