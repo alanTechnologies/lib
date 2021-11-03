@@ -62,11 +62,12 @@ public class FillBooksWithContent {
                 File convFile = new File(pathsOfBooksList.get(i));
                 Path path = Path.of(convFile.getAbsolutePath());
                 File pdfToSave = new File(path.toString());
+
                 InputStream inputStream = new FileInputStream(pdfToSave);
-                byte[] bytesEncoded =  inputStream.readAllBytes();
+                byte[] bytesOfPdf =  inputStream.readAllBytes();
 
                 bookToUpdate = books.get(i);
-                bookToUpdate.setBookContent(bytesEncoded);
+                bookToUpdate.setBookContent(bytesOfPdf);
                 bookRepository.save(bookToUpdate);
             }
         }

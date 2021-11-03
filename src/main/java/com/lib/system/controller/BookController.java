@@ -4,21 +4,12 @@ import com.lib.system.DTO.BookDTO;
 import com.lib.system.entity.Book;
 import com.lib.system.repositories.BookRepository;
 import com.lib.system.services.BookService;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Path;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/")

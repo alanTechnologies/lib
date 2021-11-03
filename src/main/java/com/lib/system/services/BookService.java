@@ -71,14 +71,13 @@ public class BookService {
 
     public List<BookDTO> getBookByItsContent(String textToSearch) throws IOException, TikaException {
 
-
         List<BookDTO> titleOfFoundBookDTO = new ArrayList<>();
         Tika tikaParser = new Tika();
         tikaParser.setMaxStringLength(-1);
         Metadata metadata = new Metadata();
 
-
         List<Book> booksAfterUpdate = getAllBooks();
+
         for (Book book : booksAfterUpdate) {
             BookDTO bookDTO = mapBookToBookDTO(book);
 
