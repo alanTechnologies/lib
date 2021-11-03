@@ -26,15 +26,6 @@ public class Client {
     private String name;
 
     @Column
-    private Integer age;
-
-    @Column
-    private String gender;
-
-    @Column
-    private String cnp;
-
-    @Column
     private String email;
 
     @Column

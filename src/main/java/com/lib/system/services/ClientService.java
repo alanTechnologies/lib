@@ -21,14 +21,6 @@ public class ClientService {
         return clientRepository.findAll();
     }
 
-    public Client getClientByEmail(String email) {
-        return clientRepository.getClientByEmail(email);
-    }
-
-    public Client getClientByCnp(String cnp) {
-        return clientRepository.getClientByCnp(cnp);
-    }
-
     public void saveClient(Map<String, String> params){
         Client client = new Client();
         client.setName(params.get("name"));
@@ -36,6 +28,11 @@ public class ClientService {
         client.setEmail(params.get("email"));
 
         clientRepository.save(client);
+    }
+
+    public Client getClientByEmail(String email)
+    {
+        return clientRepository.getClientByEmail(email);
     }
 
 }

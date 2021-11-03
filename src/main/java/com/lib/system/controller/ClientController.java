@@ -24,10 +24,5 @@ public class ClientController {
     public List<Client> findAllClients() {
         return clientService.getAllClients();
     }
-
-    @GetMapping("filtered-clients-cnp/{cnp}")
-    public Client getClientByCnp(@PathVariable(value = "cnp") String cnp) {
-        return clientService.getClientByCnp(cnp);
-    }
 }
 

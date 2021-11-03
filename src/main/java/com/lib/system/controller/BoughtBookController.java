@@ -12,18 +12,17 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class BoughtBookController {
     private BoughtBookService boughtBookService;
+
     @Autowired
-    public BoughtBookController(BoughtBookService boughtBookService){
+    public BoughtBookController(BoughtBookService boughtBookService) {
         this.boughtBookService = boughtBookService;
     }
 
     @PostMapping("bought-book")
-public void saveBoughtBook(@RequestParam Map<String,String> params){
+    public void saveBoughtBook(@RequestParam Map<String, String> params) {
 
-    boughtBookService.saveBoughtBook(params);
-}
-
-
+        boughtBookService.saveBoughtBook(params);
+    }
 
 
 }
