@@ -34,4 +34,11 @@ public class Client {
     @Column
     private String cnp;
 
+    @Column
+    private String email;
+
+    @Column
+    private String adress;
+
+
 }
