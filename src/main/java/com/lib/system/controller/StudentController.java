@@ -1,8 +1,8 @@
 package com.lib.system.controller;
 
+import com.lib.system.DTO.StudentDTO;
 import com.lib.system.entity.Student;
 import com.lib.system.services.StudentService;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +24,14 @@ public class StudentController {
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
+
     @GetMapping("/students-by-CNP/{cnp}")
     public Student getStudentByCNP(@PathVariable(value = "cnp") String cnp) {
         return studentService.getStudentByCNP(cnp);
     }
 
+    @PostMapping(value = "/update-students")
+    public Student updateStudents(@RequestBody StudentDTO studentDTO) throws Exception {
+        return studentService.updateStudents(studentDTO);
+    }
 }
