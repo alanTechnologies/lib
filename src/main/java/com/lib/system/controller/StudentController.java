@@ -26,12 +26,12 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-    @GetMapping("/students-by-CNP/{cnp}")
+    @GetMapping("/by-cnp/{cnp}")
     public Student getStudentByCNP(@PathVariable(value = "cnp") String cnp) {
         return studentService.getStudentByCNP(cnp);
     }
 
-    @PutMapping(value = "/update-students")
+    @PutMapping(value = "/update")
     public Student updateStudents(@RequestBody StudentDTO studentDTO) throws Exception {
         return studentService.updateStudents(studentDTO);
     }
