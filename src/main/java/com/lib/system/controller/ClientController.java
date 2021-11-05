@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/clients")
 @CrossOrigin(origins = "*")
 public class ClientController {
 
@@ -20,7 +20,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/clients")
+    @GetMapping
     public List<Client> findAllClients() {
         return clientService.getAllClients();
     }

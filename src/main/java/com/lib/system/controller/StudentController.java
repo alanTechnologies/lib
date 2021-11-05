@@ -4,12 +4,13 @@ import com.lib.system.DTO.StudentDTO;
 import com.lib.system.entity.Student;
 import com.lib.system.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/students")
 @CrossOrigin(origins = "*")
 public class StudentController {
 
@@ -20,7 +21,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @GetMapping("/students")
+    @GetMapping
     public List<Student> getAllStudents() {
         return studentService.getAllStudents();
     }
@@ -30,7 +31,7 @@ public class StudentController {
         return studentService.getStudentByCNP(cnp);
     }
 
-    @PostMapping(value = "/update-students")
+    @PutMapping(value = "/update-students")
     public Student updateStudents(@RequestBody StudentDTO studentDTO) throws Exception {
         return studentService.updateStudents(studentDTO);
     }

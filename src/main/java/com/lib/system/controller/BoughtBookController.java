@@ -3,12 +3,14 @@ package com.lib.system.controller;
 
 import com.lib.system.services.BoughtBookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/bought-books")
 @CrossOrigin(origins = "*")
 public class BoughtBookController {
     private BoughtBookService boughtBookService;
@@ -18,10 +20,10 @@ public class BoughtBookController {
         this.boughtBookService = boughtBookService;
     }
 
-    @PostMapping("bought-book")
-    public void saveBoughtBook(@RequestParam Map<String, String> params) {
-
+    @PostMapping
+    public ResponseEntity<HttpStatus> saveBoughtBook(@RequestParam Map<String, String> params) {
         boughtBookService.saveBoughtBook(params);
+        return  ResponseEntity.ok(HttpStatus.CREATED);
     }
 
 

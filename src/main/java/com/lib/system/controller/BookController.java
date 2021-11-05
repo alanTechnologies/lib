@@ -6,13 +6,15 @@ import com.lib.system.repositories.BookRepository;
 import com.lib.system.services.BookService;
 import org.apache.tika.exception.TikaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/books")
 @CrossOrigin(origins = "*")
 public class BookController {
 
@@ -25,29 +27,33 @@ public class BookController {
         this.bookRepository = bookRepository;
     }
 
-    @GetMapping("/available-books")
-    public List<Book> getAllBooks() {
-        return bookService.getAllBooks();
+    @GetMapping
+    public ResponseEntity<List<Book>> getAllBooks() {
+        return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
     }
 
-    @GetMapping("/filtered-books-title/{title}")
-    public List<Book> getFilteredByTitleBooks(@PathVariable(value = "title") String title) {
-        return bookService.getFilteredByTitleBooks(title);
+    @GetMapping("by-title/{title}")
+    public ResponseEntity<List<Book>> getFilteredByTitleBooks(@PathVariable(value = "title") String title) {
+        return new ResponseEntity<>(bookService.getFilteredByTitleBooks(title),HttpStatus.OK);
     }
 
-    @GetMapping("filtered-books-author/{author}")
-    public List<Book> getAllBooksByAuthor(@PathVariable(value = "author") String author) {
-        return bookService.getAllBooksByAuthor(author);
+    @GetMapping("by-author/{author}")
+    public ResponseEntity<List<Book>> getAllBooksByAuthor(@PathVariable(value = "author") String author) {
+        List<Book> list = bookService.getAllBooksByAuthor(author);
+        if(list.isEmpty()){
+            return new ResponseEntity<>(null,HttpStatus.OK);
+        }
+        return new ResponseEntity<>(list,HttpStatus.OK);
     }
 
-    @GetMapping("filtered-books-id/{id}")
+    @GetMapping("by-id/{id}")
     public Book getBookById(@PathVariable(value = "id") Long id) throws IOException {
         return bookService.getBookById(id);
     }
 
-    @GetMapping("shazam-book/{text}")
-    public List<BookDTO> getBookByContent(@PathVariable(value = "text") String text) throws IOException, TikaException {
-        return bookService.getBookByItsContent(text);
+    @GetMapping("by-paragraph/{paragraph}")
+    public List<BookDTO> getBookByContent(@PathVariable(value = "paragraph") String paragraph) throws IOException, TikaException {
+        return bookService.getBookByItsContent(paragraph);
     }
 
 }
