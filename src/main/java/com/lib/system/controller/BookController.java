@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/books")
@@ -52,7 +53,7 @@ public class BookController {
     }
 
     @GetMapping("by-paragraph/{paragraph}")
-    public List<BookDTO> getBookByContent(@PathVariable(value = "paragraph") String paragraph) throws IOException, TikaException {
+    public List<BookDTO> getBookByContent(@PathVariable(value = "paragraph") String paragraph) throws IOException, TikaException, ExecutionException, InterruptedException {
         return bookService.getBookByItsContent(paragraph);
     }
 
