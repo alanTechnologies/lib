@@ -9,8 +9,13 @@ import org.apache.tika.metadata.Metadata;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -105,7 +110,7 @@ public class BookService {
         InputStream inputStream = new ByteArrayInputStream(decoded);
         String textFromBook = tikaParser.parseToString(inputStream, metadata);
         if (textFromBook.contains(textToSearch)) {
-           return bookDTO;
+            return bookDTO;
         } else {
             System.out.println(book.getTitle() + " nu contine " + textToSearch);
         }
