@@ -57,24 +57,25 @@ public class BookService {
     }
 
     public BookDTO mapBookToBookDTO(Book book) {
-        BookDTO bookDTO = new BookDTO();
 
-        bookDTO.setTitle(book.getTitle());
-        bookDTO.setAuthor(book.getAuthor());
-        bookDTO.setId(book.getId());
-        bookDTO.setStock(book.getStock());
-        bookDTO.setBrand(book.getBrand());
-        bookDTO.setGenre(book.getGenre());
-        bookDTO.setLanguage(book.getLanguage());
-        bookDTO.setPrice(book.getPrice());
-        bookDTO.setUrl(book.getUrl());
-        bookDTO.setYear(book.getYear());
-
-        return bookDTO;
+        return BookDTO.builder()
+                .title(book.getTitle())
+                .id(book.getId())
+                .stock(book.getStock())
+                .title(book.getTitle())
+                .author(book.getAuthor())
+                .brand(book.getBrand())
+                .language(book.getLanguage())
+                .genre(book.getGenre())
+                .price(book.getPrice())
+                .url(book.getUrl())
+                .year(book.getYear())
+                .build();
     }
 
     public List<BookDTO> getBookByItsContent(String textToSearch) throws IOException, TikaException, InterruptedException, ExecutionException {
 
+        titleOfFoundBookDTO.clear();
         List<Callable<BookDTO>> callableTasks = new ArrayList<>();
         List<Book> booksAfterUpdate = getAllBooks();
         ExecutorService executor = Executors.newFixedThreadPool(10);
