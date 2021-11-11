@@ -1,7 +1,7 @@
 --changeset ALEX_D_CREATE_TABEL_STUDENT
-DROP TABLE IF EXISTS lib.student cascade;
+DROP TABLE IF EXISTS lib.ecler cascade;
 
-CREATE TABLE IF NOT EXISTS  lib.student
+CREATE TABLE IF NOT EXISTS  lib.ecler
 (
     ID        SERIAL unique ,
     NAME   character varying(255),

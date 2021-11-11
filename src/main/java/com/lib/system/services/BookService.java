@@ -2,10 +2,12 @@ package com.lib.system.services;
 
 import com.lib.system.DTO.BookDTO;
 import com.lib.system.entity.Book;
+import com.lib.system.mappers.BookDTOMapper;
 import com.lib.system.repositories.BookRepository;
 import org.apache.tika.Tika;
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
+import org.mapstruct.factory.Mappers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +26,13 @@ public class BookService {
     private BookRepository bookRepository;
     private BookDTO bookDTO;
     List<BookDTO> titleOfFoundBookDTO = new ArrayList<>();
+    BookDTOMapper bookDTOMapper;
 
 
     @Autowired
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
+        bookDTOMapper = Mappers.getMapper(BookDTOMapper.class);
     }
 
     public List<Book> getAllBooks() {
@@ -58,19 +62,21 @@ public class BookService {
 
     public BookDTO mapBookToBookDTO(Book book) {
 
-        return BookDTO.builder()
-                .title(book.getTitle())
-                .id(book.getId())
-                .stock(book.getStock())
-                .title(book.getTitle())
-                .author(book.getAuthor())
-                .brand(book.getBrand())
-                .language(book.getLanguage())
-                .genre(book.getGenre())
-                .price(book.getPrice())
-                .url(book.getUrl())
-                .year(book.getYear())
-                .build();
+//        return BookDTO.builder()
+//                .title(book.getTitle())
+//                .id(book.getId())
+//                .stock(book.getStock())
+//                .title(book.getTitle())
+//                .author(book.getAuthor())
+//                .brand(book.getBrand())
+//                .language(book.getLanguage())
+//                .genre(book.getGenre())
+//                .price(book.getPrice())
+//                .url(book.getUrl())
+//                .year(book.getYear())
+//                .build();
+
+        return bookDTOMapper.toBookDto(book);
     }
 
     public List<BookDTO> getBookByItsContent(String textToSearch) throws IOException, TikaException, InterruptedException, ExecutionException {

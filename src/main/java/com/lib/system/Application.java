@@ -1,5 +1,6 @@
 package com.lib.system;
 
+import com.lib.system.Student.EclerService;
 import com.lib.system.repositories.ClientRepository;
 import com.lib.system.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class Application {
 
 	public static void main(String[] args) throws IOException {
 		SpringApplication.run(Application.class, args);
+		EclerService eclerService = new EclerService();
+		eclerService.tryMapStruct();
 
 
 //		Transforming PDF into byte array and encoding it
